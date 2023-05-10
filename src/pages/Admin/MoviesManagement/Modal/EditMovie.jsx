@@ -14,7 +14,7 @@ import UploadComponent from "../../../../components/Upload";
 import { formValidate } from "../../../../services/helper";
 import { apiUpdateMovie } from "../../../../services/request/api";
 import dayjs from "dayjs";
-import { ShowSuccess } from "../../../../components/Message";
+import { ShowSuccess, ShowError } from "../../../../components/Message";
 
 const EditMovie = ({ getMovies }, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +23,6 @@ const EditMovie = ({ getMovies }, ref) => {
 
   useImperativeHandle(ref, () => ({
     open: (item) => {
-      console.log(item);
       setItem(item);
       setIsModalOpen(true);
       const status = () => {
@@ -48,8 +47,9 @@ const EditMovie = ({ getMovies }, ref) => {
     console.log(values);
     const formData = new FormData();
 
-    if (values?.hinhAnh) formData.append("hinhAnh", values.hinhAnh);
+    if (values.hinhAnh) formData.append("hinhAnh", values.hinhAnh);
 
+    formData.append("maPhim", item.maPhim);
     formData.append("tenPhim", values.tenPhim);
     formData.append("trailer", values.trailer);
     formData.append(
@@ -68,11 +68,16 @@ const EditMovie = ({ getMovies }, ref) => {
       formData.append("dangChieu", false);
       formData.append("sapChieu", true);
     }
-    await apiUpdateMovie(formData);
-    getMovies();
-    ShowSuccess("Chỉnh sửa thông tin phim thành công");
-    form.resetFields();
-    setIsModalOpen(false);
+
+    try {
+      await apiUpdateMovie(formData);
+      getMovies();
+      ShowSuccess("Chỉnh sửa thông tin phim thành công");
+      form.resetFields();
+      setIsModalOpen(false);
+    } catch (error) {
+      ShowError(error?.response?.data?.content);
+    }
   };
 
   const handleCancel = () => {
