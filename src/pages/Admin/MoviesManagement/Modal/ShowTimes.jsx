@@ -24,7 +24,7 @@ import {
   apiGetCinemaSystem,
 } from "../../../../services/request/api";
 import { v4 as uuid } from "uuid";
-import { ShowSuccess } from "../../../../components/Message";
+import { ShowSuccess, ShowError } from "../../../../components/Message";
 
 const ShowTimes = (_, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,14 +55,19 @@ const ShowTimes = (_, ref) => {
   };
 
   const onFinish = async (values) => {
-    await apiCreateShowtimes({
-      maPhim: item.maPhim,
-      maRap: values.maCumRap,
-      giaVe: values.giaVe,
-      ngayChieuGioChieu: dayjs(values.ngayGioChieu).format(
-        "DD/MM/YYYY hh:mm:ss"
-      ),
-    });
+    try {
+      await apiCreateShowtimes({
+        maPhim: item.maPhim,
+        maRap: values.maCumRap,
+        giaVe: values.giaVe,
+        ngayChieuGioChieu: dayjs(values.ngayGioChieu).format(
+          "DD/MM/YYYY hh:mm:ss"
+        ),
+      });
+    } catch (error) {
+      ShowError(error?.response?.data?.content);
+    }
+
     ShowSuccess("Tạo lịch chiếu thành công");
     form.resetFields();
     setIsModalOpen(false);

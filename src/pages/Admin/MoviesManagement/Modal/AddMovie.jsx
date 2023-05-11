@@ -14,7 +14,7 @@ import UploadComponent from "../../../../components/Upload";
 import { formValidate } from "../../../../services/helper";
 import { apiAddMovie } from "../../../../services/request/api";
 import dayjs from "dayjs";
-import { ShowSuccess } from "../../../../components/Message";
+import { ShowSuccess, ShowError } from "../../../../components/Message";
 
 const AddMovie = ({ getMovies }, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,11 +51,15 @@ const AddMovie = ({ getMovies }, ref) => {
       formData.append("dangChieu", false);
       formData.append("sapChieu", true);
     }
-    await apiAddMovie(formData);
-    getMovies();
-    ShowSuccess("Thêm phim thành công");
-    form.resetFields();
-    setIsModalOpen(false);
+    try {
+      await apiAddMovie(formData);
+      getMovies();
+      ShowSuccess("Thêm phim thành công");
+      form.resetFields();
+      setIsModalOpen(false);
+    } catch (error) {
+      ShowError(error?.response?.data?.content);
+    }
   };
 
   const handleCancel = () => {
