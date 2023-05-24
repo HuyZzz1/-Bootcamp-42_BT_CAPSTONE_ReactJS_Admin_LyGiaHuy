@@ -5,7 +5,6 @@ import React, {
   useEffect,
 } from "react";
 import {
-  Modal,
   Form,
   Input,
   Row,
@@ -25,6 +24,7 @@ import {
 } from "../../../../services/request/api";
 import { v4 as uuid } from "uuid";
 import { ShowSuccess, ShowError } from "../../../../components/Message";
+import { StyledModal } from "./styled";
 
 const ShowTimes = (_, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -88,10 +88,10 @@ const ShowTimes = (_, ref) => {
 
   return (
     <>
-      <Modal
+      <StyledModal
         open={isModalOpen}
         onCancel={handleCancel}
-        width="40%"
+        width="50%"
         footer={null}
         destroyOnClose
         title={<h3>Tạo lịch chiếu phim</h3>}
@@ -189,7 +189,7 @@ const ShowTimes = (_, ref) => {
             </Col>
           </Row>
         </Form>
-      </Modal>
+      </StyledModal>
     </>
   );
 };

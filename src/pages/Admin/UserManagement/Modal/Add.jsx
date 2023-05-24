@@ -1,8 +1,9 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
-import { Modal, Form, Input, Row, Col, Select, Space, Button } from "antd";
+import { Form, Input, Row, Col, Select, Space, Button } from "antd";
 import { formValidate } from "../../../../services/helper";
 import { apiAddUser } from "../../../../services/request/api";
 import { ShowSuccess, ShowError } from "../../../../components/Message";
+import { StyledModal } from "./styled";
 
 const Add = ({ getListUser }, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,10 +37,10 @@ const Add = ({ getListUser }, ref) => {
 
   return (
     <>
-      <Modal
+      <StyledModal
         open={isModalOpen}
         onCancel={handleCancel}
-        width="40%"
+        width="50%"
         footer={null}
         destroyOnClose
         title={<h3>Thêm người dùng</h3>}
@@ -113,7 +114,7 @@ const Add = ({ getListUser }, ref) => {
             </Col>
           </Row>
         </Form>
-      </Modal>
+      </StyledModal>
     </>
   );
 };

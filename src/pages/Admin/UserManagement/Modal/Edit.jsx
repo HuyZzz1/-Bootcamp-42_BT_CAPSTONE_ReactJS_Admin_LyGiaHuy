@@ -1,8 +1,9 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
-import { Modal, Form, Input, Row, Col, Select, Space, Button } from "antd";
+import { Form, Input, Row, Col, Select, Space, Button } from "antd";
 import { formValidate } from "../../../../services/helper";
 import { apiUpdateUserAdmin } from "../../../../services/request/api";
 import { ShowSuccess, ShowError } from "../../../../components/Message";
+import { StyledModal } from "./styled";
 
 const Edit = ({ getListUser }, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,7 +36,7 @@ const Edit = ({ getListUser }, ref) => {
 
   return (
     <>
-      <Modal
+      <StyledModal
         open={isModalOpen}
         onCancel={handleCancel}
         width="40%"
@@ -112,7 +113,7 @@ const Edit = ({ getListUser }, ref) => {
             </Col>
           </Row>
         </Form>
-      </Modal>
+      </StyledModal>
     </>
   );
 };

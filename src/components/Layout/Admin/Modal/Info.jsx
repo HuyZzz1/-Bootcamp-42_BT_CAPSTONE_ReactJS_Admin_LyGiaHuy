@@ -5,6 +5,7 @@ import { ShowSuccess, ShowError } from "../../../Message";
 import { useDispatch } from "react-redux";
 import { setAdmin } from "../../../../redux/appSlice";
 import { useSelector } from "react-redux";
+import { StyledModal } from "./styled";
 
 const Info = (_, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,10 +44,10 @@ const Info = (_, ref) => {
   };
 
   return (
-    <Modal
+    <StyledModal
       open={isModalOpen}
       onCancel={handleCancel}
-      width="40%"
+      width="50%"
       footer={null}
       destroyOnClose
       title={<h3>Thông tin tài khoản</h3>}
@@ -122,7 +123,7 @@ const Info = (_, ref) => {
           </Col>
         </Row>
       </Form>
-    </Modal>
+    </StyledModal>
   );
 };
 

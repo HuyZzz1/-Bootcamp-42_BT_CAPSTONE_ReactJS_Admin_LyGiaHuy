@@ -6,11 +6,15 @@ export const column = (onEdit, onDelete) => [
     key: "name",
     title: "Họ tên",
     dataIndex: "hoTen",
+    fixed: "left",
+    width: 250,
   },
   {
     key: "account",
     title: "Tài khoản",
     dataIndex: "taiKhoan",
+    fixed: "left",
+    width: 200,
   },
   {
     key: "email",

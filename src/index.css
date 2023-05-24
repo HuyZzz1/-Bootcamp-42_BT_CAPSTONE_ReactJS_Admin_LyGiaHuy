@@ -34,7 +34,7 @@ li {
 
 ::-webkit-scrollbar {
   width: 4px;
-  height: 4px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -49,6 +49,10 @@ li {
 
 .ant-form-item {
   margin-bottom: 15px !important;
+}
+
+.no-margin.ant-form-item {
+  margin-bottom: 0 !important;
 }
 
 .ant-input {

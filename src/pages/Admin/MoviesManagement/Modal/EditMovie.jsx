@@ -1,20 +1,11 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
-import {
-  Modal,
-  Form,
-  Input,
-  Row,
-  Col,
-  DatePicker,
-  Select,
-  Space,
-  Button,
-} from "antd";
+import { Form, Input, Row, Col, DatePicker, Select, Space, Button } from "antd";
 import UploadComponent from "../../../../components/Upload";
 import { formValidate } from "../../../../services/helper";
 import { apiUpdateMovie } from "../../../../services/request/api";
 import dayjs from "dayjs";
 import { ShowSuccess, ShowError } from "../../../../components/Message";
+import { StyledModal } from "./styled";
 
 const EditMovie = ({ getMovies }, ref) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,10 +78,10 @@ const EditMovie = ({ getMovies }, ref) => {
 
   return (
     <>
-      <Modal
+      <StyledModal
         open={isModalOpen}
         onCancel={handleCancel}
-        width="40%"
+        width="50%"
         footer={null}
         destroyOnClose
         title={<h3>Chỉnh sửa thông tin phim</h3>}
@@ -170,7 +161,7 @@ const EditMovie = ({ getMovies }, ref) => {
             </Col>
           </Row>
         </Form>
-      </Modal>
+      </StyledModal>
     </>
   );
 };
